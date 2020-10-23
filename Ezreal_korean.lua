@@ -40,6 +40,7 @@ local Ezreal_korean_menuCastRHitChanceCombo = UIMenu.Ezreal_korean.Ezreal_korean
 local Ezreal_korean_menuCastR_ManaCombo = UIMenu.Ezreal_korean.Ezreal_korean_Combo:AddSlider("Ezreal_korean_RMANA", "[%] mana limit ", 0, 100, 1, 30)
 local Ezreal_korean_menuCastWQBoolCombo = UIMenu.Ezreal_korean.Ezreal_korean_Combo:AddBool("Ezreal_korean_CastWQ", "wait [Q] before [W]", true)
 local Ezreal_korean_menuCastRKillableBoolCombo = UIMenu.Ezreal_korean.Ezreal_korean_Combo:AddBool("Ezreal_korean_CastRKillable", "Cast [R] only if killable", true)
+local Ezreal_korean_menuCastBOTRKBoolCombo = UIMenu.Ezreal_korean.Ezreal_korean_Combo:AddBool("Ezreal_korean_CastBOTRK", "Use BOTRK?", true)
 
 
 
@@ -375,11 +376,25 @@ local function RlogicHarass(targetR)
     end
 end
 
+--------------------------------------------------------------------------------------------------------------------------------------
+--CAST BOTRK
 
 
+local function CastBotrk(target)
+	for i=SpellSlots.Item1, SpellSlots.Item6 do
+		local item = Player:GetSpell(i)
+		if item ~= nil and item then
 
 
-
+			if item.Name == "ItemSwordOfFeastAndFamine" or item.Name == "BilgewaterCutlass" then
+				if Player:GetSpellState(i) == SpellStates.Ready and Ezreal_korean_menuCastBOTRKBoolCombo.Value then
+					Input.Cast(i, target)
+				end
+				break
+			end
+		end
+	end
+end
 
 --------------------------------------------------------------------------------------------------------------------------------------
 
@@ -414,7 +429,7 @@ local function OnTick()
     if target and Orbwalker.GetMode() == "Combo" then
 
         Combo(target)
-
+        CastBotrk(target)
         --HARRAS
     elseif target and Orbwalker.GetMode() == "Harass" then
         Harass(target)
