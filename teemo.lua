@@ -253,7 +253,7 @@ local W_Mana_Combo = UIMenu.teemo.combo:AddSlider("W_Mana_Combo", english[5], 0,
 
 UIMenu.teemo.combo:AddLabel("s2", "--------------------")
 
-local R_Combo = UIMenu.teemo.combo:AddBool("R_Combo", english[7], true)
+local R_Combo = UIMenu.teemo.combo:AddBool("R_Combo", english[7], false)
 local R_Mana_Combo = UIMenu.teemo.combo:AddSlider("R_Mana_Combo", english[5], 0, 100, 1, 30)
 local R_Shroom_Combo = UIMenu.teemo.combo:AddSlider("R_Shroom_Combo", english[8], 1, 3, 1, 3)
 
@@ -271,7 +271,7 @@ local W_Type_Harass = UIMenu.teemo.Harass:AddDropDown("W_Type_Harass", "When use
 local W_Mana_Harass = UIMenu.teemo.Harass:AddSlider("W_Mana_Harass", english[5], 0, 100, 1, 30)
 UIMenu.teemo.Harass:AddLabel("s4", "--------------------")
 
-local R_Harass = UIMenu.teemo.Harass:AddBool("R_Harass", english[7], true)
+local R_Harass = UIMenu.teemo.Harass:AddBool("R_Harass", english[7], false)
 local R_Mana_Harass = UIMenu.teemo.Harass:AddSlider("R_Mana_Harass", english[5], 0, 100, 1, 30)
 local R_Shroom_Harass = UIMenu.teemo.Harass:AddSlider("R_Shroom_Harass", english[8], 1, 3, 1, 3)
 
