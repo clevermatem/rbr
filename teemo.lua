@@ -512,7 +512,7 @@ function CastR(target, isUsable, manaPercent
     local position = nil
 
     if deltashroom >= 3.0 and
-            targetAI and isUsable and Player.Position:Distance(target.Position) <= spellR.Range
+            targetAI and isUsable and Player.Position:Distance(target.Position) <= RRange()
             and Player:GetSpell(SpellSlots.R).Ammo >= numberOfShrooms
             and (Player.AsAttackableUnit.Mana >= (manaPercent / 100) * Player.AsAttackableUnit.MaxMana) then
         position = Prediction.GetPredictedPosition(targetAI, spellR, Player.Position)
@@ -748,7 +748,7 @@ function CastRMinions(isUsable, mana,
             if nminion then
                 local predPos = nminion:FastPrediction(spellR.Delay)
                 local dist = predPos:Distance(Player.Position)
-                if dist < spellR.Range then
+                if dist < RRange() then
                     points[#points + 1] = predPos
                 end
             end
@@ -900,6 +900,17 @@ end
 
 
 ---[ON DRAW]----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+function RRange()
+    if Player:GetSpell(SpellSlots.R).Level==1 then
+        return 400
+        elseif Player:GetSpell(SpellSlots.R).Level==2 then
+        return 650
+        elseif Player:GetSpell(SpellSlots.R).Level==3 then
+        return 900
+    end
+    
+end
+------[ON DRAW]----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 --[[
 specify what to show on player's  screen ]]
@@ -916,7 +927,7 @@ function OnDraw()
         end
 
         if Player:GetSpellState(SpellSlots.R) == SpellStates.Ready and R_Drawing.Value then
-            Renderer.DrawCircle3D(Player.Position, spellR.Range, 30, 2, R_Color_Drawing.Value)
+            Renderer.DrawCircle3D(Player.Position, RRange(), 30, 2, R_Color_Drawing.Value)
         end
 
         if Mid_Lane.Value then
