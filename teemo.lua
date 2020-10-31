@@ -406,7 +406,7 @@ local spellR = {
     Range = Player:GetSpell(SpellSlots.R).DisplayRange,
     Radius = 320,
     Delay = 0.25,
-    Speed = 2000,
+    Speed = 100,
     Type = "Linear",
 
     Collisions = { WindWall = true }
